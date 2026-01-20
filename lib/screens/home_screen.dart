@@ -21,24 +21,50 @@ class HomeScreen extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
+            backgroundColor: Colors.white,
             title: Text(task == null ? 'Add Task' : 'Edit Task'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: titleController,
-                  decoration: const InputDecoration(labelText: 'Title'),
+                  decoration: InputDecoration(
+                    labelText: 'Title',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[900]!),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[900]!),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[900]!, width: 2),
+                    ),
+                  ),
                   autofocus: true,
                 ),
+                const SizedBox(height: 10),
                 TextField(
                   controller: descriptionController,
-                  decoration: const InputDecoration(labelText: 'Description'),
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[900]!),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[900]!),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[900]!, width: 2),
+                    ),
+                  ),
+                  maxLines: 3,
                 ),
               ],
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
+                style: TextButton.styleFrom(foregroundColor: Colors.blue),
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
@@ -62,6 +88,10 @@ class HomeScreen extends StatelessWidget {
                     Navigator.pop(context);
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                ),
                 child: const Text('Save'),
               ),
             ],

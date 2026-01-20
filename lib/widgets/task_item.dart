@@ -71,9 +71,36 @@ class TaskItem extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
-                  todoProvider.deleteTask(task.id);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${task.title} deleted')),
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      backgroundColor: Colors.white,
+                      title: const Text('Delete Task'),
+                      content: const Text(
+                          'Are you sure you want to delete this task?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.blue),
+                          child: const Text('Cancel'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            todoProvider.deleteTask(task.id);
+                            Navigator.pop(context); // Close dialog
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('${task.title} deleted')),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            foregroundColor: Colors.white,
+                          ),
+                          child: const Text('Delete'),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
